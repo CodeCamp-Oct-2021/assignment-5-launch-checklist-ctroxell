@@ -1,4 +1,4 @@
-// Write your helper functions here!
+
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
@@ -16,12 +16,39 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    */
 }
 
-function validateInput(testInput) {
-   
+function validateInput(testInput) {   
+    if (testInput === "") {
+        window.alert("All fields required!")
+        return "Empty"
+    }
+   if (isNaN(testInput)) {
+       return 'Not a Number';
+   } else if (!isNaN(testInput)) {
+       return "Is a Number";
+   }
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
+   //preventDefault();
+   if (validateInput(pilot) !== 'Not a Number') {
+       window.alert("All fields required!");
+   } else if (validateInput(copilot) !== "Not a Number") {
+       window.alert("All fields required!");
+   } else if (validateInput(fuelLevel) !== "Is a Number") {
+       window.alert("All fields required!");
+   } else if (validateInput(cargoLevel) !== "Is a Number") {
+       window.alert("All fields required!");
+   } else {
+        let pilotStatus = document.getElementById("pilotStatus");
+        let copilotStatus = document.getElementById("copilotStatus");
+        let fuelStatus = document.getElementById("fuelStatus");
+        let cargoStatus = document.getElementById("cargoStatus");
+
+        pilotStatus.innerHTML = `Pilot: ${pilot} ready`;
+        copilotStatus.innerHTML = `Copilot: ${copilot} ready`;
+   }
+
+
 }
 
 async function myFetch() {
