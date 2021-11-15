@@ -4,9 +4,10 @@
 
 window.addEventListener("load", function() {
     console.log("window loaded");
+
     let form = document.getElementById("launchForm");
     let faultyItems = document.getElementById("faultyItems");
-   
+    faultyItems.style.visibility = 'hidden';
     form.addEventListener("submit", function(event){
         event.preventDefault();
         console.log("submit")

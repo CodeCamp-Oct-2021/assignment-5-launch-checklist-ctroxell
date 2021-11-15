@@ -31,7 +31,7 @@ function validateInput(testInput) {
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    //preventDefault();
-   list.style.visibility = 'hidden';
+   
    if (validateInput(pilot) !== 'Not a Number' || validateInput(copilot) !== "Not a Number" || validateInput(fuelLevel) !== "Is a Number" || validateInput(cargoLevel) !== "Is a Number") {
       window.alert("All fields required.");
    } else {
