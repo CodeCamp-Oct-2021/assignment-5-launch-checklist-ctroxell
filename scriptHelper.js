@@ -3,17 +3,19 @@ require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
-   /*
-                <h2>Mission Destination</h2>
+   
+   let missionTarget = document.getElementById("missionTarget")
+   missionTarget.innerHTML =
+                `<h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
+                    <li>Name: ${name}</li>
+                    <li>Diameter: ${diameter}</li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
+                    <li>Distance from Earth: ${distance}</li>
+                    <li>Number of Moons: ${moons}</li>
                 </ol>
-                <img src="">
-   */
+                <img src="${imageUrl}">`;
+   
 }
 
 function validateInput(testInput) {   
@@ -37,8 +39,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         let copilotStatus = document.getElementById("copilotStatus");
         let fuelStatus = document.getElementById("fuelStatus");
         let cargoStatus = document.getElementById("cargoStatus");
-        pilotStatus.innerHTML = `Pilot: ${pilot}, ready`;
-        copilotStatus.innerHTML = `Copilot: ${copilot}, ready`;
+        pilotStatus.innerHTML = `Pilot ${pilot} is ready`;
+        copilotStatus.innerHTML = `Copilot ${copilot} is ready`;
         if (Number(fuelLevel) < 10000) {
             faultyItems.style.visibility = "visible";
             fuelStatus.innerHTML = "Fuel level too low for launch";
@@ -65,13 +67,16 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 async function myFetch() {
     let planetsReturned;
 
-    planetsReturned = await fetch().then( function(response) {
-        });
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        return response.json();
+});
 
-    return planetsReturned;
+    return planetsReturned
 }
 
-function pickPlanet(planets) {
+function pickPlanet(listedPlanets) {
+    let randomNumber = Math.floor(Math.random() * listedPlanets.length);
+    return listedPlanets[randomNumber];
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
